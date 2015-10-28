@@ -27,34 +27,41 @@ public class UserController
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    EmpService empService;
+
 
 
 
 
 //    private SimpleDriverDataSource dataSource;
 
-	@RequestMapping(value="/" ,method = RequestMethod.GET)
-	public String printWelcome(ModelMap model)
-    {
+//	@RequestMapping(value="/" ,method = RequestMethod.GET)
+//	public String printWelcome(ModelMap model)
+//    {
+//
+//    	model.addAttribute("message", "Hello world!");
+//		return "signupform";
+//	}
 
-    	model.addAttribute("message", "Hello world!");
-		return "signupform";
-	}
 
-
-	@RequestMapping(value="/newuser",method = RequestMethod.POST)
-	public String insertUser(@RequestParam("useremail") String email,@RequestParam("username") String username,@RequestParam("favProgramming") String favProgramming,ModelMap map)
+	@RequestMapping(value="/newemp",method = RequestMethod.POST)
+	public String insertUser(@RequestParam("useremail") String useremail,@RequestParam("username") String username)
 	{
-		User newUser = new User(username,email,favProgramming);
-        System.out.println(newUser);
-        map.addAttribute("User", newUser);
-        try
-        {
-            userService.createUser(newUser);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "displayUser";
+//		User newUser = new User(username,email,favProgramming);
+//        System.out.println(newUser);
+//        map.addAttribute("User", newUser);
+//        try
+//        {
+//            userService.createUser(newUser);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return "displayUser";
+
+        Emp emp = new Emp(username,useremail);
+        empService.addEmp(emp);
+        return null;
 	}
     @RequestMapping(value="/getUser",method = RequestMethod.GET)
     public void getUser(@RequestParam("id") int id)
